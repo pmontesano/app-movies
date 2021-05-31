@@ -6,6 +6,7 @@ node_modules
 
 # Trash
 .DS_Store
+.vscode
 
 # Dynamically processed files
 build
