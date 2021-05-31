@@ -10,6 +10,7 @@ node_modules
 
 # Dynamically processed files
 build
+dist
 
 
 # Mocks
