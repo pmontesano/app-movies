@@ -6,7 +6,7 @@ import template from './template';
 /**
  * Routers
  */
-import { fetchData, render } from '../controllers/home';
+import { fetchData, render } from '../controllers/main';
 
 const server = express();
 

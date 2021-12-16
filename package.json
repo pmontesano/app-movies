@@ -4,11 +4,11 @@
   "description": "app for movies",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",    
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "webpack",
     "build:server": "babel src --out-dir dist",
     "start:client": "webpack --watch",
-    "start:server": "nodemon --exec babel-node src/server/index.js",    
+    "start:server": "nodemon --exec babel-node src/server/index.js",
     "build": "npm run build:client && npm run build:server",
     "start-dev": "npm run start:client & npm run start:server"
   },

@@ -15,7 +15,7 @@ const get = (req) => () =>
     }
   );
 
-const HomeService = (req) => {
+const Service = (req) => {
   if (!req) {
     // eslint-disable-next-line
     console.warn('services/searches: you must provide a req object');
@@ -25,4 +25,4 @@ const HomeService = (req) => {
   };
 };
 
-export default HomeService;
+export default Service;

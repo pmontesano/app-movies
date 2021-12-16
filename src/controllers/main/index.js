@@ -1,13 +1,13 @@
 import React from 'react';
-import HomeService from '../../server/services';
-import HomePage from '../../pages/home';
+import MainService from '../../server/services';
+import MainPage from '../../pages/main';
 import ReactDOMServer from 'react-dom/server';
 
 /**
  * Fetch Site data
  */
 exports.fetchData = (req, res, next) => {
-  HomeService(req)
+  MainService(req)
     .get()
     .then((data) => {
       res.locals.initialState = data.data;
@@ -24,12 +24,12 @@ exports.fetchData = (req, res, next) => {
  */
 exports.render = (template) =>
   function render(req, res) {
-    const Home = (props) => <HomePage {...props} />;
+    const Main = (props) => <MainPage {...props} />;
 
     const initialState = res.locals.initialState;
 
     const component = ReactDOMServer.renderToString(
-      <Home props={initialState} />
+      <Main props={initialState} />
     );
 
     /**
