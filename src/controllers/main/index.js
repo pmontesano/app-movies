@@ -1,7 +1,7 @@
-import React from 'react';
-import MainService from '../../server/services';
-import MainPage from '../../pages/main';
-import ReactDOMServer from 'react-dom/server';
+import React from "react";
+import MainService from "../../server/services";
+import MainPage from "../../index";
+import ReactDOMServer from "react-dom/server";
 
 /**
  * Fetch Site data

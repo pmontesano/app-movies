@@ -1,23 +1,21 @@
-import express from 'express';
-import path from 'path';
+import express from "express";
+import path from "path";
 
-import template from './template';
+import template from "./template";
 
 /**
  * Routers
  */
-import { fetchData, render } from '../controllers/main';
+import { fetchData, render } from "../controllers/main";
 
 const server = express();
 
-server.use(
-  '/static',
-  express.static(path.join(__dirname, '..', '..', 'dist', 'static'))
-);
+server.use("/", express.static(path.join(__dirname, "../../build")));
+server.use("/static", express.static(path.join(__dirname, "../static")));
 
 /**
  * Mount routers
  */
-server.get('/', fetchData, render(template));
+server.get("/", fetchData, render(template));
 
-server.listen(3000, () => console.log('Server started http://localhosts:3000'));
+server.listen(3000, () => console.log("Server started http://localhosts:3000"));

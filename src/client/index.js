@@ -1,8 +1,9 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import React from "react";
+import ReactDom from "react-dom";
+import "../styles/main.scss";
 
-import App from '../pages/main';
+import App from "../index";
 
 const preloadedState = window._PRELOADED_STATE;
 
-ReactDom.hydrate(<App {...preloadedState} />, document.getElementById('root'));
+ReactDom.hydrate(<App {...preloadedState} />, document.getElementById("root"));
