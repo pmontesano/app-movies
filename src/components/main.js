@@ -1,21 +1,37 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Navbar from "./navbar";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import MainService from '../server/services';
+import Navbar from './navbar';
 
-const App = (props) => {
-  console.log("props", props);
+const Main = (props) => {
+  console.log('pablito props', props);
 
   const dispatch = useDispatch();
+
+  const fetchThunk = async (dispatch) => {
+    dispatch({ type: 'FETCH_PENDING' });
+    try {
+      const data = await MainService('latest')
+        .get()
+        .then((data) => data.data);
+
+      dispatch({ type: 'FETCH_COMPLETE', payload: data });
+    } catch (err) {
+      dispatch({ type: 'FETCH_ERROR', error: err.message });
+    }
+  };
+
+  const fecth = () => dispatch(fetchThunk);
 
   return (
     <div>
       <Navbar />
       <h1>Hola {props.pepe}</h1>
-      <button onClick={() => dispatch({ type: "PEPE" })}>button</button>
+      <button onClick={fecth}>FETCH</button>
     </div>
   );
 };
 
-App.defaultProps = {};
+Main.defaultProps = {};
 
-export default App;
+export default Main;

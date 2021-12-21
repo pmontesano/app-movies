@@ -1,17 +1,16 @@
-import React from "react";
-import MainService from "../../server/services";
-import MainPage from "../../index";
-import ReactDOMServer from "react-dom/server";
+import React from 'react';
+import MainService from '../../server/services';
+import MainPage from '../../index';
+import ReactDOMServer from 'react-dom/server';
 
 /**
  * Fetch Site data
  */
 exports.fetchData = (req, res, next) => {
-  MainService(req)
+  MainService('popular')
     .get()
     .then((data) => {
       res.locals.initialState = data.data;
-
       next();
     })
     .catch((err) => {
@@ -29,7 +28,7 @@ exports.render = (template) =>
     const initialState = res.locals.initialState;
 
     const component = ReactDOMServer.renderToString(
-      <Main props={initialState} />
+      <Main initialState={initialState} />
     );
 
     /**

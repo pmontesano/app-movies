@@ -1,16 +1,13 @@
-import { FETCH_START } from "../actions/types";
+import { FETCH_START, FETCH_COMPLETE } from '../actions/types';
 
 export const reducer =
   (initialState) =>
   (state = initialState, action) => {
     switch (action.type) {
-      case "FETCH_START":
+      case FETCH_START:
         return state;
-      case "PEPE":
-        return {
-          ...state,
-          pepe: "pepe",
-        };
+      case FETCH_COMPLETE:
+        return action.payload;
       default:
         return state;
     }
