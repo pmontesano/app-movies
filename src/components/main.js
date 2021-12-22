@@ -2,16 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MainService from '../server/services';
 import Navbar from './navbar';
+import List from './list';
 
 const Main = (props) => {
-  console.log('pablito props', props);
-
   const dispatch = useDispatch();
 
-  const fetchThunk = async (dispatch) => {
+  const fetchThunk = (category) => async (dispatch) => {
     dispatch({ type: 'FETCH_PENDING' });
     try {
-      const data = await MainService('latest')
+      const data = await MainService(category)
         .get()
         .then((data) => data.data);
 
@@ -21,13 +20,14 @@ const Main = (props) => {
     }
   };
 
-  const fecth = () => dispatch(fetchThunk);
+  const fecth = (category) => dispatch(fetchThunk(category));
 
   return (
     <div>
       <Navbar />
       <h1>Hola {props.pepe}</h1>
-      <button onClick={fecth}>FETCH</button>
+      <List results={} />
+      <button onClick={() => fecth('top_rated')}>FETCH</button>
     </div>
   );
 };
@@ -35,3 +35,4 @@ const Main = (props) => {
 Main.defaultProps = {};
 
 export default Main;
+
