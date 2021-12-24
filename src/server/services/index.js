@@ -1,15 +1,15 @@
 const axios = require('axios');
+import { config } from '../../config/default-config';
 
-const apiUrl = 'https://api.themoviedb.org/3/movie';
-const apiKey = '93bdccf8057252978f579b4d00437c7e';
+const { apiKey, apiUrl } = config;
 
-const doRequest = () => (url, params) => {
+const doRequest = (url, params) => {
   return axios.get(url, params);
 };
 
 // listings movies
 const get = (param) => () =>
-  doRequest()(`${apiUrl}/${param}?api_key=${apiKey}&language=es-AR&page=1`, {
+  doRequest(`${apiUrl}/${param}?api_key=${apiKey}&language=es-AR&page=1`, {
     responseType: 'json',
   });
 

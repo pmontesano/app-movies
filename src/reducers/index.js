@@ -1,14 +1,6 @@
-import { FETCH_START, FETCH_COMPLETE } from '../actions/types';
+import { combineReducers } from 'redux';
+import { fetchReducer } from './fetch';
 
-export const reducer =
-  (initialState) =>
-  (state = initialState, action) => {
-    switch (action.type) {
-      case FETCH_START:
-        return state;
-      case FETCH_COMPLETE:
-        return action.payload;
-      default:
-        return state;
-    }
-  };
+const reducer = fetchReducer;
+
+export default reducer;
