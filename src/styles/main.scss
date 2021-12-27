@@ -1,4 +1,29 @@
+@import './reset.scss';
+
 body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: #eee;
   font-size: 30px;
+}
+
+.button--grey {
+  color: #616161;
+  border-color: #767676;
+  font-weight: 500;
+
+  &:hover {
+    color: inherit;
+    border-color: inherit;
+  }
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+
+  &_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

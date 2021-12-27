@@ -1,4 +1,4 @@
-import { FETCH_START, FETCH_COMPLETE } from '../actions/types';
+import { FETCH_START, FETCH_COMPLETE, FETCH_PENDING } from '../actions/types';
 
 export const fetchReducer =
   (initialState) =>
@@ -6,8 +6,10 @@ export const fetchReducer =
     switch (action.type) {
       case FETCH_START:
         return state;
+      case FETCH_PENDING:
+        return { ...state, loading: true };
       case FETCH_COMPLETE:
-        return action.payload;
+        return { ...action.payload, loading: false };
       default:
         return state;
     }

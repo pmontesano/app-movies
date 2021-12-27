@@ -1,24 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchThunk } from '../actions';
-import Navbar from './navbar';
-import List from './list';
+import ContainerPage from './container';
+import ListMovies from './listMovies';
+import Header from './header';
 
 const Main = (props) => {
-  const dispatch = useDispatch();
-
-  const fecthCategory = (param) => dispatch(fetchThunk(param));
-
+  console.log(props);
   return (
-    <div>
-      <Navbar />
-      <h1>Hola {props.pepe}</h1>
-      <button onClick={() => fecthCategory('popular')}>Lo más popular</button>
-      <button onClick={() => fecthCategory('top_rated')}>
-        Mejor ranqueadas
-      </button>
-      <List {...props} />
-    </div>
+    <>
+      <Header />
+      <ContainerPage sx={{ mt: '100px' }}>
+        <ListMovies {...props} />
+      </ContainerPage>
+    </>
   );
 };
 

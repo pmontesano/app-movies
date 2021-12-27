@@ -1,26 +1,26 @@
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
 
-  context: path.resolve(__dirname, "src/client"),
+  context: path.resolve(__dirname, 'src/client'),
 
   entry: {
-    app: "./index.js",
+    app: './index.js',
   },
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css",
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 
   output: {
-    publicPath: "/",
-    path: path.resolve(__dirname, "build"),
-    filename: "[name].js",
+    publicPath: '/',
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].js',
   },
 
   module: {
@@ -28,14 +28,14 @@ module.exports = {
       {
         test: /\.js/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        test: /\.(scss|css)$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
     ],
   },
 
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
 };
