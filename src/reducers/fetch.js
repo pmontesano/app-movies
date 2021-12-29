@@ -9,7 +9,7 @@ export const fetchReducer =
       case FETCH_PENDING:
         return { ...state, loading: true };
       case FETCH_COMPLETE:
-        return { ...action.payload, loading: false };
+        return { ...state, ...action.payload, loading: false };
       default:
         return state;
     }

@@ -1,10 +1,9 @@
 import React from 'react';
-import ContainerPage from './container';
-import ListMovies from './listMovies';
-import Header from './header';
+import ContainerPage from '../layout/container';
+import ListMovies from '../movies/listMovies';
+import Header from '../header';
 
 const Main = (props) => {
-  console.log(props);
   return (
     <>
       <Header />

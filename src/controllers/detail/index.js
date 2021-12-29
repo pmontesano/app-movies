@@ -8,17 +8,10 @@ import { url } from '../../config/url';
 /**
  * Fetch Site data
  */
-exports.fetchData = (req, res, next) => {
-  const {
-    categories: { popular },
-  } = config;
-
-  const {
-    categories: { movie },
-  } = url;
-
+exports.fetchMovieDetails = (req, res, next) => {
   Service(movie, popular)
-    .get.then((data) => {
+    .get()
+    .then((data) => {
       res.locals.initialState = data.data;
       next();
     })
@@ -30,7 +23,7 @@ exports.fetchData = (req, res, next) => {
 /**
  * Render Navigation
  */
-exports.render = (template) =>
+exports.renderDetails = (template) =>
   function render(req, res) {
     const Main = (props) => <MainPage {...props} />;
 

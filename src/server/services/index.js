@@ -1,22 +1,31 @@
-const axios = require('axios');
+import { doRequest } from './rest-client';
 import { config } from '../../config/default-config';
+import { url } from '../../config/url';
 
-const { apiKey, apiUrl } = config;
+const { apiKey, apiUrl, language } = config;
 
-const doRequest = (url, params) => {
-  return axios.get(url, params);
-};
+const { categories } = url;
 
 // listings movies
-const get = (param) => () =>
-  doRequest(`${apiUrl}/${param}?api_key=${apiKey}&language=es-AR&page=1`, {
-    responseType: 'json',
-  });
+const get = (pathParam, movieParam, page) =>
+  doRequest(
+    `${apiUrl}/${categories[pathParam]}/${movieParam}?api_key=${apiKey}&language=${language}&page=${page}`,
+    {
+      responseType: 'json',
+    }
+  );
 
-const Service = (param) => {
-  return {
-    get: get(param),
-  };
-};
+const getDetails = (pathParam, movieParam, page = 1) =>
+  doRequest(
+    `${apiUrl}/${categories[pathParam]}/${movieParam}?api_key=${apiKey}&language=${language}&page=${page}`,
+    {
+      responseType: 'json',
+    }
+  );
+
+const Service = (pathParam, movieParam, page) => ({
+  get: get(pathParam, movieParam, page),
+  getDetails: getDetails(pathParam, movieParam, page),
+});
 
 export default Service;

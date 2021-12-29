@@ -1,11 +1,11 @@
-import React from 'react';
-import { url } from '../config/url';
-import CardFull from './cardFull';
-import Stack from './stack';
-import Skeleton from './skeleton';
+import React, { useState, useEffect } from 'react';
+import { url } from '../../config/url';
+import CardFull from '../card/cardFull';
+import Stack from '../layout/stack';
+import Skeleton from '../skeleton';
 
-const List = ({ fetchData: { results, loading }, className }) => {
-  const { imgUrl } = url;
+const List = ({ results, loading }) => {
+  const { imgUrl } = url.images;
 
   const style = {
     movieListClass: {

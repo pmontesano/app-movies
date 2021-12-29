@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './navbar';
-import ContainerPage from './container';
+import ContainerPage from '../layout/container';
 
 const Header = () => {
   return (
