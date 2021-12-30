@@ -9,7 +9,7 @@ const root = (component, initialState) =>
           <link rel="stylesheet" type="text/css" href="/app.css" />
         </head>
         <body>
-        <div id="root">${component}</div>
+        <div id="app">${component}</div>
         <script src="/app.js"></script>
       </body>
       </html>`;

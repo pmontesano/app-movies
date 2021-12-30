@@ -1,35 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { url } from '../../config/url';
 import CardFull from '../card/cardFull';
-import Stack from '../layout/stack';
 import Skeleton from '../skeleton';
 
 const List = ({ results, loading }) => {
   const { imgUrl } = url.images;
 
-  const style = {
-    movieListClass: {
-      display: 'flex',
-    },
-
-    movieListStackClass: {
-      flexWrap: 'wrap',
-    },
-
-    movieListItemClass: {
-      display: 'flex',
-      alignSelf: 'stretch',
-      flex: '1 0 21%',
-      marginTop: '20px',
-      marginLeft: 0,
-    },
-  };
-
-  const { movieListClass, movieListItemClass, movieListStackClass } = style;
-
   const Item = () =>
     results.map((movie) => (
-      <li key={movie.id} style={{ ...movieListItemClass }}>
+      <li key={movie.id} className="movie-list__item">
         {loading === true ? (
           <Skeleton />
         ) : (
@@ -37,7 +16,7 @@ const List = ({ results, loading }) => {
             cardTitle={movie.title}
             cardImage={`${imgUrl}${movie.backdrop_path}`}
             cardImageHeight={420}
-            cardWidth={345}
+            cardWidth={400}
             cardRate={movie.vote_average}
             cardDescription={movie.overview}
             cardSubheader={movie.release_date}
@@ -48,10 +27,8 @@ const List = ({ results, loading }) => {
     ));
 
   return (
-    <ul style={{ ...movieListClass }}>
-      <Stack direction="row" spacing={2} style={{ ...movieListStackClass }}>
-        <Item />
-      </Stack>
+    <ul className="movie-list">
+      <Item />
     </ul>
   );
 };

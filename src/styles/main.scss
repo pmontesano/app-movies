@@ -43,3 +43,16 @@ body {
     }
   }
 }
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    display: flex;
+    align-self: stretch;
+    flex: 1 0 21%;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+}
