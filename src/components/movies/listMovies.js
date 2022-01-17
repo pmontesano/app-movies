@@ -54,6 +54,8 @@ const listMovies = ({ fetchData }) => {
       category: movieParam,
       page: page,
     });
+
+    setPage(page);
   };
 
   const handleChangePage = (pathParam, movieParam) => (e, value) => {

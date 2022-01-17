@@ -15,17 +15,8 @@ const get = (pathParam, movieParam, page) =>
     }
   );
 
-const getDetails = (pathParam, movieParam, page = 1) =>
-  doRequest(
-    `${apiUrl}/${categories[pathParam]}/${movieParam}?api_key=${apiKey}&language=${language}&page=${page}`,
-    {
-      responseType: 'json',
-    }
-  );
-
 const Service = (pathParam, movieParam, page) => ({
   get: get(pathParam, movieParam, page),
-  getDetails: getDetails(pathParam, movieParam, page),
 });
 
 export default Service;

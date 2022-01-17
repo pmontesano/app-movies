@@ -14,3 +14,18 @@ export const fetchReducer =
         return state;
     }
   };
+
+export const fetchMovieDetailsReducer =
+  (initialState) =>
+  (state = initialState, action) => {
+    switch (action.type) {
+      case FETCH_START:
+        return state;
+      case FETCH_PENDING:
+        return { ...state, loading: true };
+      case FETCH_COMPLETE:
+        return { ...action.payload, loading: false };
+      default:
+        return state;
+    }
+  };

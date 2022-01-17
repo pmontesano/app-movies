@@ -13,7 +13,7 @@ import { blue, blueGrey } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { fontSize } from '@mui/system';
+import Skeleton from '../skeleton';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,31 +35,42 @@ export default function RecipeReviewCard({
   cardSubheader,
   cardWidth,
   cardTitleTypographyProps,
+  handleClick,
+  loading,
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
+  const handleExpandClick = () => (e) => {
+    e.preventDefault();
     setExpanded(!expanded);
   };
 
   return (
     <Card sx={{ maxWidth: 345 }} style={{ width: cardWidth }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: blueGrey[700] }} aria-label="recipe">
-            {cardRate}
-          </Avatar>
-        }
-        title={cardTitle}
-        titleTypographyProps={{ ...cardTitleTypographyProps }}
-        subheader={cardSubheader}
-      />
-      <CardMedia
-        component="img"
-        height={cardImageHeight}
-        image={cardImage}
-        alt={cardTitle}
-      />
+      {loading === true ? (
+        <Skeleton />
+      ) : (
+        <>
+          <CardHeader
+            onClick={handleClick}
+            avatar={
+              <Avatar sx={{ bgcolor: blueGrey[700] }} aria-label="recipe">
+                {cardRate}
+              </Avatar>
+            }
+            title={cardTitle}
+            titleTypographyProps={{ ...cardTitleTypographyProps }}
+            subheader={cardSubheader}
+          />
+          <CardMedia
+            onClick={handleClick}
+            component="img"
+            height={cardImageHeight}
+            image={cardImage}
+            alt={cardTitle}
+          />
+        </>
+      )}
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />

@@ -29,6 +29,14 @@ body {
   }
 }
 
+.logo {
+  color: #fff;
+
+  a {
+    color: inherit;
+  }
+}
+
 .navbar {
   display: flex;
   &__links {

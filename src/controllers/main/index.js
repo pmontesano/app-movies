@@ -1,7 +1,4 @@
-import React from 'react';
 import Service from '../../server/services';
-import MainPage from '../../index';
-import ReactDOMServer from 'react-dom/server';
 import { config } from '../../config/default-config';
 import { url } from '../../config/url';
 
@@ -26,22 +23,3 @@ exports.fetchData = (req, res, next) => {
       next(new Error(err));
     });
 };
-
-/**
- * Render Navigation
- */
-exports.render = (template) =>
-  function render(req, res) {
-    const Main = (props) => <MainPage {...props} />;
-
-    const initialState = res.locals.initialState;
-
-    const component = ReactDOMServer.renderToString(
-      <Main initialState={initialState} />
-    );
-
-    /**
-     * Render View
-     */
-    res.send(template(component, initialState));
-  };

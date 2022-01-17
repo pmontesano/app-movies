@@ -6,8 +6,9 @@ import template from './template';
 /**
  * Routers
  */
-import { fetchData, render } from '../controllers/main';
-import { fetchMovieDetails, renderDetails } from '../controllers/detail';
+import { fetchData } from '../controllers/main';
+import { fetchMovieDetails } from '../controllers/detail';
+import { render } from '../controllers/render';
 
 const server = express();
 
@@ -19,6 +20,6 @@ server.use('/static', express.static(path.join(__dirname, '../static')));
  */
 server.get('/', fetchData, render(template));
 
-server.get(`/movie/123`, fetchMovieDetails, renderDetails(template));
+server.get(`/movie/:moviename`, fetchMovieDetails, render(template));
 
 server.listen(3000, () => console.log('Server started http://localhosts:3000'));
