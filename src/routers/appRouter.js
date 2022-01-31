@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import PrivateRoute from './privateRoute';
 import PublicRoute from './publicRoute';
 import Header from '../components/header';
@@ -10,7 +9,7 @@ import Register from '../pages/register';
 import Details from '../pages/details';
 import NotFound from '../pages/notFound';
 
-export default function AppRouter() {
+const AppRouter = () => {
   return (
     <>
       <Header />
@@ -23,4 +22,6 @@ export default function AppRouter() {
       </Switch>
     </>
   );
-}
+};
+
+export default AppRouter;

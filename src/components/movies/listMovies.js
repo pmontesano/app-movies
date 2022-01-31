@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchThunk } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { url } from '../../config/url';
+import { config } from '../../config/default-config';
 import Stack from '../layout/stack';
 import List from '../list';
 
-const listMovies = ({ fetchData }) => {
+const listMovies = ({ fetchData, bookmarks }) => {
   const { results, loading } = fetchData;
   const dispatch = useDispatch();
 
@@ -45,6 +46,13 @@ const listMovies = ({ fetchData }) => {
   const [showResults, setShowResults] = useState(data);
   const [page, setPage] = useState(1);
   const { category, title } = showResults;
+
+  useEffect(() => {
+    dispatch(fetchThunk());
+    setShowResults({
+      ...data,
+    });
+  }, []);
 
   const fecthCategory = (pathParam, movieParam, page, newTitle) => {
     dispatch(fetchThunk(pathParam, movieParam, page));
@@ -87,7 +95,7 @@ const listMovies = ({ fetchData }) => {
           ))}
         </Stack>
       </div>
-      <List results={results} loading={loading} />
+      <List results={results} loading={loading} bookmarks={bookmarks} />
       <Stack
         direction="row"
         justifyContent="center"
