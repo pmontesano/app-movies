@@ -21,6 +21,8 @@ const store = createStore(initReducer, applyMiddleware(asyncMiddleware));
  * Fetch Site data
  */
 exports.fetchData = (req, res, next) => {
+  console.log(req.locals);
+
   const {
     categories: { popular },
   } = config;
@@ -47,8 +49,11 @@ exports.render = (template) =>
   function render(req, res) {
     const Main = (props) => <MainPage {...props} />;
 
+    console.log('res.locals.user', res.locals.user);
+
     const context = {};
     const initialState = store.getState();
+    initialState.user = res.locals.user ? res.locals.user : null;
 
     const component = ReactDOMServer.renderToString(
       <Provider store={store}>

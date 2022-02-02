@@ -18,12 +18,12 @@ const initReducer = reducer;
 const store = createStore(initReducer, applyMiddleware(asyncMiddleware));
 
 ReactDom.hydrate(
-  <BrowserRouter>
-    <AuthProvider>
-      <Provider store={store}>
+  <AuthProvider>
+    <Provider store={store}>
+      <BrowserRouter>
         <App {...preloadedState} />
-      </Provider>
-    </AuthProvider>
-  </BrowserRouter>,
+      </BrowserRouter>
+    </Provider>
+  </AuthProvider>,
   document.getElementById('app')
 );

@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { url } from '../../config/url';
-import { config } from '../../config/default-config';
 import Stack from '../layout/stack';
 import List from '../list';
 
