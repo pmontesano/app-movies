@@ -7,7 +7,7 @@ function PublicRoute({ component: Component, isAuthenticated, ...rest }) {
 
   return (
     <Route {...rest}>
-      {!auth.isLogged ? (
+      {!auth?.isLogged ? (
         <Component />
       ) : (
         <Redirect

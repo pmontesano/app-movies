@@ -27,8 +27,6 @@ const MovieDetail = (props) => {
     dispatch(fetchMovieDetails(moviename));
   }, []);
 
-  console.log(moviename);
-
   const namespace = 'movie-detail';
 
   const movieData = (

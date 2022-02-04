@@ -2,7 +2,7 @@ const root = (component, initialState) =>
   `<!doctype html>
         <html>
         <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
           <script>window._PRELOADED_STATE = ${JSON.stringify({
             initialState,
           })}</script>

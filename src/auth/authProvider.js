@@ -10,14 +10,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     try {
       localStorage.setItem('user', JSON.stringify(user));
-      console.log('hay localStorage', user);
-      if (user !== null) {
-        console.log('hay usuario');
-        function render(req, res) {
-          console.log('entra en la func');
-          res.user = true;
-        }
-      }
     } catch (err) {
       localStorage.removeItem('user');
       console.log(err);

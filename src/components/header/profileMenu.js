@@ -71,10 +71,10 @@ export default function AccountMenu() {
         </MenuItem>
         <Divider />
         <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
           <Link to="/" onClick={auth?.logout}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
             Salir
           </Link>
         </MenuItem>
