@@ -25,11 +25,11 @@ export const fetchThunk =
   };
 
 export const fetchMovieDetails = (movieId) => async (dispatch) => {
-  dispatch({ type: 'FETCH_PENDING' });
+  dispatch({ type: 'FETCH_DETAILS_PENDING' });
   try {
     const data = await ServicesDetails(movieId).get.then((data) => data.data);
-    dispatch({ type: 'FETCH_COMPLETE', payload: data });
+    dispatch({ type: 'FETCH_DETAILS_COMPLETE', payload: data });
   } catch (err) {
-    dispatch({ type: 'FETCH_ERROR', error: err.message });
+    dispatch({ type: 'FETCH_DETAILS_ERROR', error: err.message });
   }
 };

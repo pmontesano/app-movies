@@ -2,6 +2,8 @@
 @import './reset.scss';
 @import './pageNotFound.scss';
 @import '../components/movies/movies';
+@import '../components/header/header.scss';
+@import '../components/bookmarks/bookmarks.scss';
 
 body {
   font-family: 'Lato', sans-serif;
@@ -17,41 +19,6 @@ body {
   &:hover {
     color: inherit;
     border-color: inherit;
-  }
-}
-
-.header {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 20px 0;
-
-  &_content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-
-.logo {
-  color: #fff;
-
-  a {
-    color: inherit;
-  }
-}
-
-.navbar {
-  display: flex;
-  &__links {
-    color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 2px;
-    padding: 8px 24px;
-
-    &:hover {
-      color: rgba(255, 255, 255, 1);
-      border-color: rgba(255, 255, 255, 1);
-    }
   }
 }
 
@@ -82,4 +49,30 @@ body {
   &__link:focus {
     color: $blue;
   }
+}
+
+.card-simple {
+  display: flex;
+
+  &__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
 }

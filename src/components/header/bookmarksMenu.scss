@@ -1,0 +1,46 @@
+.bookmarks-widget {
+  padding: 0;
+}
+
+.bookmarks-widget__title {
+  font-size: 15px;
+  padding-left: 16px;
+  padding-bottom: 8px;
+  margin-bottom: 0;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.bookmarks-widget__empty {
+  background-color: #eee;
+  padding: 16px;
+
+  p {
+    font-size: 14px;
+  }
+}
+
+.bookmarks-widget__results {
+  max-height: 356px;
+  overflow: scroll;
+}
+
+.bookmarks-widget__bottom {
+  text-align: center;
+  font-size: 14px;
+  padding: 12px;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bookmarks-list {
+  &__item {
+    padding: 16px;
+
+    & + & {
+      border-top: solid 1px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__img {
+    min-width: 120px;
+  }
+}

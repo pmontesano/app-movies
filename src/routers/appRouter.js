@@ -8,6 +8,7 @@ import Login from '../pages/login';
 import Register from '../pages/register';
 import Details from '../pages/details';
 import NotFound from '../pages/notFound';
+import Bookmarks from '../pages/Bookmarks';
 
 const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
         <PublicRoute exact path="/login" component={Login} />
         <PublicRoute exact path="/register" component={Register} />
         <Route exact path="/movie/:moviename" component={Details} />
+        <Route exact path="/bookmarks" component={Bookmarks} />
         <Route exact path="*" component={NotFound} />
       </Switch>
     </>

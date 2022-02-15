@@ -11,13 +11,12 @@ const Navbar = () => {
   const isLogged = auth?.isLogged;
 
   const LoginMenu = () => (
-    <Box
-      className="navbar__links"
-      sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}
-    >
-      <Typography sx={{ minWidth: 100 }}>
-        <Link to="/login">INICIAR SESION/REGISTRARSE</Link>
-      </Typography>
+    <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <div className="navbar__links">
+        <Typography sx={{ minWidth: 100 }}>
+          <Link to="/login">INICIAR SESION/REGISTRARSE</Link>
+        </Typography>
+      </div>
     </Box>
   );
 

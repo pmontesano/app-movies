@@ -1,18 +1,15 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import Logout from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
-import useAuth from '../../auth/useAuth';
+import MenuItem from '@mui/material/MenuItem';
+import MyMenu from './myMenu';
+import BookmarksMenu from './bookmarksMenu';
 
 export default function AccountMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorBookmarksEl, setAnchorBookmarksEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -21,64 +18,34 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const auth = useAuth();
+  const openBookmarks = Boolean(anchorBookmarksEl);
+  const handleBookmarksClick = (event) => {
+    setAnchorBookmarksEl(event.currentTarget);
+  };
+  const handleBookmarksClose = () => {
+    setAnchorBookmarksEl(null);
+  };
 
   return (
-    <React.Fragment>
+    <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
             <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
           </IconButton>
         </Tooltip>
+        <Tooltip title="Favorite">
+          <MenuItem onClick={handleBookmarksClick} size="small">
+            Favoritos
+          </MenuItem>
+        </Tooltip>
       </Box>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&:before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <MenuItem>
-          <Avatar /> Mi cuenta
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <Link to="/" onClick={auth?.logout}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Salir
-          </Link>
-        </MenuItem>
-      </Menu>
-    </React.Fragment>
+      <MyMenu anchorEl={anchorEl} open={open} handleClose={handleClose} />
+      <BookmarksMenu
+        anchorEl={anchorBookmarksEl}
+        open={openBookmarks}
+        handleClose={handleBookmarksClose}
+      />
+    </>
   );
 }

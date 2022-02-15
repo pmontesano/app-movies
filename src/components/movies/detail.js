@@ -3,7 +3,6 @@ import { url } from '../../config/url';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchMovieDetails } from '../../actions';
-import { Skeleton } from '@mui/material';
 
 const MovieDetail = (props) => {
   const {

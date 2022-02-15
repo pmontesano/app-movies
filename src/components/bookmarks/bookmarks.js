@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import UseAuth from '../../auth/useAuth';
+import UseBookmarks from '../../bookmarks/useBookmarks';
 
 const Bookmarks = ({ id, handleAddBookmarks, handleRevomeBookmarks }) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const auth = UseAuth();
   const history = useHistory();
+  const bookmarksValue = UseBookmarks();
+
+  const bookmarked = bookmarksValue?.bookmarksList.includes(id);
 
   const handleAddBookmarksClick = (id) => {
     if (auth?.isLogged) {
-      if (!isBookmarked) {
-        setIsBookmarked(true);
+      if (!bookmarked) {
         handleAddBookmarks(id);
       } else {
-        setIsBookmarked(false);
         handleRevomeBookmarks(id);
       }
     } else {
@@ -26,7 +27,7 @@ const Bookmarks = ({ id, handleAddBookmarks, handleRevomeBookmarks }) => {
   return (
     <IconButton
       id={id}
-      color={isBookmarked ? 'primary' : 'default'}
+      color={bookmarked ? 'primary' : 'default'}
       aria-label="add to favorites"
       onClick={() => handleAddBookmarksClick(id)}
     >

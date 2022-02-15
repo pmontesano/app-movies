@@ -1,0 +1,34 @@
+.header {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px 0;
+
+  &_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.logo {
+  color: #fff;
+
+  a {
+    color: inherit;
+  }
+}
+
+.navbar {
+  display: flex;
+  &__links {
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+    padding: 8px 24px;
+
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+      border-color: rgba(255, 255, 255, 1);
+    }
+  }
+}

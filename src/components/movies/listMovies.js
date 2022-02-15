@@ -48,6 +48,7 @@ const listMovies = ({ fetchData, bookmarks }) => {
 
   useEffect(() => {
     dispatch(fetchThunk());
+
     setShowResults({
       ...data,
     });
@@ -94,7 +95,12 @@ const listMovies = ({ fetchData, bookmarks }) => {
           ))}
         </Stack>
       </div>
-      <List results={results} loading={loading} bookmarks={bookmarks} />
+      <List
+        data={fetchData}
+        results={results}
+        loading={loading}
+        bookmarks={bookmarks}
+      />
       <Stack
         direction="row"
         justifyContent="center"

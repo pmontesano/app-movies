@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import AuthProvider from '../auth/authProvider';
+import BookmarksProvider from '../bookmarks/bookmarksProvider';
 import reducer from '../reducers';
 import { asyncMiddleware } from '../middlewares/async';
 import '@fontsource/roboto';
@@ -19,11 +20,13 @@ const store = createStore(initReducer, applyMiddleware(asyncMiddleware));
 
 ReactDom.hydrate(
   <AuthProvider>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App {...preloadedState} />
-      </BrowserRouter>
-    </Provider>
+    <BookmarksProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App {...preloadedState} />
+        </BrowserRouter>
+      </Provider>
+    </BookmarksProvider>
   </AuthProvider>,
   document.getElementById('app')
 );

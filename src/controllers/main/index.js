@@ -18,8 +18,6 @@ const store = createStore(initReducer, applyMiddleware(asyncMiddleware));
  * Fetch Site data
  */
 exports.fetchData = (req, res, next) => {
-  console.log(req.locals);
-
   const {
     categories: { popular },
   } = config;

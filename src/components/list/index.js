@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchMovieDetails } from '../../actions';
 import { addBookmarks, removeBookmarks } from '../../actions';
 import { url } from '../../config/url';
 import CardFull from '../card/cardFull';
+import {
+  handleAddBookmarksFunc,
+  handleRemoveBookmarksFunc,
+} from '../bookmarks/bookmarksHandles';
+import useBookmarks from '../../bookmarks/useBookmarks';
 
-const List = ({ results, loading, bookmarks }) => {
+const List = ({ results, loading, data }) => {
   const { imgUrl } = url.images;
   const dispatch = useDispatch();
-  const [bookmarksState, setbookmarksState] = useState(bookmarks);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const bookmarksContext = useBookmarks();
 
   const onHandleClick = (movieId) => (e) => {
     e.preventDefault;
@@ -17,28 +21,15 @@ const List = ({ results, loading, bookmarks }) => {
   };
 
   const handleAddBookmarks = (id) => {
-    const newState = {
-      ...bookmarksState,
-      bookmarksList: bookmarksState.bookmarksList.concat(id),
-    };
-
-    setbookmarksState(newState);
+    const newState = handleAddBookmarksFunc(id, results, bookmarksContext);
+    bookmarksContext.addBookmark(newState);
     dispatch(addBookmarks(newState));
   };
 
   const handleRevomeBookmarks = (id) => {
-    const newsBookmarksList = bookmarksState.bookmarksList.find(
-      (x) => x !== id
-    );
-
-    const newState = {
-      ...bookmarksState,
-      bookmarksList: bookmarksState.bookmarksList.splice(id),
-    };
-
+    const newState = handleRemoveBookmarksFunc(id, bookmarksContext);
+    bookmarksContext.removeBookmark(newState);
     dispatch(removeBookmarks(newState));
-
-    localStorage.removeItem('bookmarks', JSON.stringify(id));
   };
 
   const Item = () =>
@@ -64,7 +55,7 @@ const List = ({ results, loading, bookmarks }) => {
             bookmarksId={movie.id}
             handleAddBookmarks={handleAddBookmarks}
             handleRevomeBookmarks={handleRevomeBookmarks}
-            isBookmarked={isBookmarked}
+            isBookmarked={movie.bookmarked}
           />
         </li>
       );
