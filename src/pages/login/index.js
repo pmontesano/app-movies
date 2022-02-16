@@ -22,7 +22,7 @@ const Login = () => {
   };
 
   return (
-    <BodyClassName className="login">
+    <BodyClassName className="body-white-bg">
       <div className="login__form">
         <h3>Accede a tu cuenta</h3>
         <p>
