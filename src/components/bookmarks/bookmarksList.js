@@ -12,28 +12,35 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { url } from '../../config/url';
 import { removeBookmarks } from '../../actions';
-import { handleRemoveBookmarksFunc } from './bookmarksHandles';
+import {
+  handleRemoveBookmarksFunc,
+  handleRemoveBookmarksSelectedFunc,
+} from './bookmarksHandles';
 import useBookmarks from '../../bookmarks/useBookmarks';
 
 const BookmarkList = ({ results }) => {
-  const [checked, setChecked] = useState([0]);
   const bookmarksContext = useBookmarks();
-
   const dispatch = useDispatch();
-
   const { imgUrl } = url.images;
+  const [isCheckAll, setIsCheckAll] = useState(false);
+  const [isCheck, setIsCheck] = useState([]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  const handleClick = (id) => (e) => {
+    console.log(id);
+    const { checked } = e.target;
+    setIsCheck([...isCheck, id]);
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+    if (!checked) {
+      setIsCheck(isCheck.filter((x) => x !== id));
     }
+  };
 
-    setChecked(newChecked);
+  const handleSelectAll = (e) => {
+    setIsCheckAll(!isCheckAll);
+    setIsCheck(results.map((x) => x.id));
+    if (isCheckAll) {
+      setIsCheck([]);
+    }
   };
 
   const handleRemoveBookmarks = (id, state) => (e) => {
@@ -41,52 +48,53 @@ const BookmarkList = ({ results }) => {
     const newState = handleRemoveBookmarksFunc(id, state);
     bookmarksContext.removeBookmark(newState);
     dispatch(removeBookmarks(newState));
+    setIsCheck([]);
   };
 
-  const FavouriteListItem = ({ movie, labelId }) => (
+  const handleRemoveBookmarksSelected = (ids, state) => (e) => {
+    e.preventDefault();
+    const newState = handleRemoveBookmarksSelectedFunc(ids, state);
+    bookmarksContext.removeBookmark(newState);
+    dispatch(removeBookmarks(newState));
+    setIsCheck([]);
+  };
+
+  const FavouriteListItem = ({ id, img, title, description }) => (
     <ListItem
-      key={movie.id}
+      key={id}
       secondaryAction={
         <Button
           size="small"
-          onClick={handleRemoveBookmarks(movie.id, bookmarksContext)}
+          onClick={handleRemoveBookmarks(id, bookmarksContext)}
         >
           Eliminar
         </Button>
       }
     >
-      <ListItemButton
-        role={undefined}
-        onClick={handleToggle(movie)}
-        dense
-        sx={{ maxWidth: 80 }}
-      >
+      <ListItemButton role={undefined} dense sx={{ maxWidth: 80 }}>
         <ListItemIcon>
           <Checkbox
+            onClick={handleClick(id)}
             edge="start"
-            checked={checked.indexOf(movie) !== -1}
             tabIndex={-1}
             disableRipple
-            inputProps={{ 'aria-labelledby': labelId }}
+            inputProps={{ 'aria-labelledby': id }}
+            checked={isCheck.includes(id)}
           />
         </ListItemIcon>
       </ListItemButton>
       <div className="bookmarks-list__info">
-        <Link to={`/movie/${movie.id}`}>
+        <Link to={`/movie/${id}`}>
           <span className="bookmarks-list__img">
             <CardMedia
               component="img"
               height="140"
-              image={`${imgUrl}${movie.img}`}
-              alt={movie.title}
+              image={`${imgUrl}${img}`}
+              alt={title}
               sx={{ borderRadius: '4px' }}
             />
           </span>
-          <ListItemText
-            id={labelId}
-            primary={movie.title}
-            secondary={movie.description}
-          />
+          <ListItemText id={id} primary={title} secondary={description} />
         </Link>
       </div>
     </ListItem>
@@ -94,6 +102,27 @@ const BookmarkList = ({ results }) => {
 
   return (
     <div className="bookmarks-content">
+      <div className="bookmarks-list-top">
+        <ListItemButton role={undefined} dense sx={{ maxWidth: 80 }}>
+          <ListItemIcon>
+            <Checkbox
+              disabled={results?.length === 0 ? true : false}
+              edge="start"
+              onClick={handleSelectAll}
+              checked={results?.length === 0 ? '' : isCheckAll}
+              tabIndex={-1}
+              disableRipple
+              inputProps={{ 'aria-labelledby': 1 }}
+            />
+          </ListItemIcon>
+        </ListItemButton>
+        <Button
+          disabled={isCheck.length === 0}
+          onClick={handleRemoveBookmarksSelected(isCheck, bookmarksContext)}
+        >
+          Eliminar favoritos seleccionados
+        </Button>
+      </div>
       <List
         sx={{ width: '100%', bgcolor: 'background.paper' }}
         className="bookmarks-list"
@@ -109,7 +138,7 @@ const BookmarkList = ({ results }) => {
           <TransitionGroup>
             {results?.map((movie) => (
               <CSSTransition key={movie.id} timeout={500} classNames="item">
-                <FavouriteListItem movie={movie} labelId={movie.id} />
+                <FavouriteListItem {...movie} />
               </CSSTransition>
             ))}
           </TransitionGroup>

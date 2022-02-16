@@ -6,6 +6,9 @@ import {
   FETCH_DETAILS_COMPLETE,
   FETCH_DETAILS_PENDING,
   FETCH_DETAILS_ERROR,
+  FETCH_SIMILAR_PENDING,
+  FETCH_SIMILAR_COMPLETE,
+  FETCH_SIMILAR_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -45,6 +48,19 @@ export const fetchMovieDetailsReducer = (state = initialState, action) => {
     case FETCH_DETAILS_COMPLETE:
       return { ...state, ...action.payload, loading: false };
     case FETCH_DETAILS_ERROR:
+      return { ...state, ...action.error, loading: false };
+    default:
+      return state;
+  }
+};
+
+export const fetchMovieSimilarReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_SIMILAR_PENDING:
+      return { ...state, loading: true };
+    case FETCH_SIMILAR_COMPLETE:
+      return { ...state, ...action.payload, loading: false };
+    case FETCH_SIMILAR_ERROR:
       return { ...state, ...action.error, loading: false };
     default:
       return state;

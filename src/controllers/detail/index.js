@@ -1,5 +1,4 @@
 import ServiceDetails from '../../server/services/fetchDetails';
-import { matchPath } from 'react-router';
 
 /**
  * Fetch movie details

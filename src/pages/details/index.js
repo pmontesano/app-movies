@@ -5,8 +5,14 @@ import MovieDetail from '../../components/movies/detail.js';
 const Details = (props) => {
   const initialState = useSelector((state) => state);
 
-  const { fetchMovieDetails } = initialState;
+  const { fetchMovieDetails, fetchMovieSimilar } = initialState;
 
-  return <MovieDetail {...fetchMovieDetails} {...props} />;
+  return (
+    <MovieDetail
+      {...fetchMovieDetails}
+      movieSimilar={fetchMovieSimilar}
+      {...props}
+    />
+  );
 };
 export default Details;

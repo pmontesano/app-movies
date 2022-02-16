@@ -87,21 +87,23 @@ export default function BookmarksWidget({ results, handleClose }) {
           </p>
         </div>
       ) : (
-        <ul className="bookmarks-widget__results">
-          <TransitionGroup>
-            {results.map((movie) => (
-              <CSSTransition key={movie.id} timeout={500} classNames="item">
-                <FavouriteResults {...movie} />
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        </ul>
+        <>
+          <ul className="bookmarks-widget__results">
+            <TransitionGroup>
+              {results.map((movie) => (
+                <CSSTransition key={movie.id} timeout={500} classNames="item">
+                  <FavouriteResults {...movie} />
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+          </ul>
+          <div className="bookmarks-widget__bottom">
+            <Link to="/bookmarks" onClick={handleClose}>
+              Ver todos los favoritos
+            </Link>
+          </div>
+        </>
       )}
-      <div className="bookmarks-widget__bottom">
-        <Link to="/bookmarks" onClick={handleClose}>
-          Ver todos los favoritos
-        </Link>
-      </div>
     </>
   );
 }

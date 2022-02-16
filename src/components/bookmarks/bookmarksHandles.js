@@ -16,7 +16,7 @@ export const handleAddBookmarksFunc = (id, results, bookmarksState) => {
   const newState = {
     ...bookmarksState,
     bookmarksList: bookmarksState.bookmarksList.concat(id),
-    results: bookmarksState.results.concat(newBookmarks),
+    results: [newBookmarks, ...bookmarksState.results],
   };
 
   return newState;
@@ -27,6 +27,16 @@ export const handleRemoveBookmarksFunc = (id, bookmarksState) => {
     ...bookmarksState,
     bookmarksList: bookmarksState.bookmarksList.filter((x) => x !== id),
     results: bookmarksState.results.filter((x) => x.id !== id),
+  };
+
+  return newState;
+};
+
+export const handleRemoveBookmarksSelectedFunc = (ids, bookmarksState) => {
+  const newState = {
+    ...bookmarksState,
+    bookmarksList: bookmarksState.bookmarksList.filter((x) => !ids.includes(x)),
+    results: bookmarksState.results.filter((x) => !ids.includes(x.id)),
   };
 
   return newState;

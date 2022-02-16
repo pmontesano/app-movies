@@ -13,8 +13,15 @@ const get = (movieId) => {
   );
 };
 
+const getSimilar = (movieId) => {
+  return doRequest(
+    `${apiUrl}/movie/${movieId}/similar?api_key=${apiKey}&language=${language}&page=1`
+  );
+};
+
 const ServiceDetails = (movieId) => ({
   get: get(movieId),
+  getSimilar: getSimilar(movieId),
 });
 
 export default ServiceDetails;

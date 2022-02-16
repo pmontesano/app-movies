@@ -1,10 +1,16 @@
-import { fetchInitialData, fetchThunk, fetchMovieDetails } from './fetch';
+import {
+  fetchInitialData,
+  fetchThunk,
+  fetchMovieDetails,
+  fetchMovieSimilar,
+} from './fetch';
 import { addBookmarks, removeBookmarks } from './bookmarks';
 
 export {
   fetchInitialData,
   fetchThunk,
   fetchMovieDetails,
+  fetchMovieSimilar,
   addBookmarks,
   removeBookmarks,
 };

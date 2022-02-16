@@ -33,3 +33,15 @@ export const fetchMovieDetails = (movieId) => async (dispatch) => {
     dispatch({ type: 'FETCH_DETAILS_ERROR', error: err.message });
   }
 };
+
+export const fetchMovieSimilar = (movieId) => async (dispatch) => {
+  dispatch({ type: 'FETCH_SIMILAR_PENDING' });
+  try {
+    const data = await ServicesDetails(movieId).getSimilar.then(
+      (data) => data.data
+    );
+    dispatch({ type: 'FETCH_SIMILAR_COMPLETE', payload: data });
+  } catch (err) {
+    dispatch({ type: 'FETCH_SIMILAR_ERROR', error: err.message });
+  }
+};

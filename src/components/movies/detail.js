@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { url } from '../../config/url';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchMovieDetails } from '../../actions';
+import { fetchMovieDetails, fetchMovieSimilar } from '../../actions';
 
 const MovieDetail = (props) => {
   const {
@@ -16,6 +16,7 @@ const MovieDetail = (props) => {
     genres,
     loading,
     runtime,
+    movieSimilar,
   } = props;
   const { imgBackground, imgPicture } = url.images;
 
@@ -24,7 +25,10 @@ const MovieDetail = (props) => {
 
   useEffect(() => {
     dispatch(fetchMovieDetails(moviename));
+    dispatch(fetchMovieSimilar(moviename));
   }, []);
+
+  console.log('movieSimilar', movieSimilar);
 
   const namespace = 'movie-detail';
 
