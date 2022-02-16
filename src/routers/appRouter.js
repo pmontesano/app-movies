@@ -8,7 +8,7 @@ import Login from '../pages/login';
 import Register from '../pages/register';
 import Details from '../pages/details';
 import NotFound from '../pages/notFound';
-import Bookmarks from '../pages/Bookmarks';
+import Bookmarks from '../pages/bookmarks';
 
 const AppRouter = () => {
   return (
