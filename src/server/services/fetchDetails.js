@@ -19,9 +19,16 @@ const getSimilar = (movieId) => {
   );
 };
 
+const getVideo = (movieId) => {
+  return doRequest(
+    `${apiUrl}/movie/${movieId}/videos?api_key=${apiKey}&language=${language}&page=1`
+  );
+};
+
 const ServiceDetails = (movieId) => ({
   get: get(movieId),
   getSimilar: getSimilar(movieId),
+  getVideo: getVideo(movieId),
 });
 
 export default ServiceDetails;

@@ -4,7 +4,7 @@ const Loading = (props) => {
   return (
     <div className="loading-block">
       Cargando
-      <div class="lds-ellipsis">
+      <div className="lds-ellipsis">
         <div></div>
         <div></div>
         <div></div>

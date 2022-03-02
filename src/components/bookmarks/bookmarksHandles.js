@@ -1,4 +1,5 @@
 export const handleAddBookmarksFunc = (id, results, bookmarksState) => {
+  const numberId = parseInt(id);
   const newBookmarks = results.reduce((acc, el) => {
     if (el.id === id) {
       return {
@@ -15,7 +16,30 @@ export const handleAddBookmarksFunc = (id, results, bookmarksState) => {
 
   const newState = {
     ...bookmarksState,
-    bookmarksList: bookmarksState.bookmarksList.concat(id),
+    bookmarksList: bookmarksState.bookmarksList.concat(numberId),
+    results: [newBookmarks, ...bookmarksState.results],
+  };
+
+  return newState;
+};
+
+export const handleAddSingleBookmarksFunc = (id, results, bookmarksState) => {
+  const numberId = parseInt(id);
+
+  const newBookmarks = results.reduce((acc, el) => {
+    return {
+      ...acc,
+      id: el.id,
+      title: el.title,
+      description: el.overview,
+      rating: el.vote_average,
+      img: el.backdrop_path,
+    };
+  }, {});
+
+  const newState = {
+    ...bookmarksState,
+    bookmarksList: bookmarksState.bookmarksList.concat(numberId),
     results: [newBookmarks, ...bookmarksState.results],
   };
 
@@ -23,9 +47,10 @@ export const handleAddBookmarksFunc = (id, results, bookmarksState) => {
 };
 
 export const handleRemoveBookmarksFunc = (id, bookmarksState) => {
+  const numberId = parseInt(id);
   const newState = {
     ...bookmarksState,
-    bookmarksList: bookmarksState.bookmarksList.filter((x) => x !== id),
+    bookmarksList: bookmarksState.bookmarksList.filter((x) => x !== numberId),
     results: bookmarksState.results.filter((x) => x.id !== id),
   };
 
@@ -47,7 +72,14 @@ export const checkBookmarked = (id) => {
     ? JSON.parse(localStorage.getItem('bookmarks')).bookmarksList.includes(id)
     : false;
 
-  console.log('checkBookmarked getBookmarksStorage', getBookmarksStorage);
-
   return getBookmarksStorage;
+};
+
+export const checkBookmarkedId = (id, bookmarks) => {
+  console.log(bookmarks);
+  // const getBookmarksStorage = bookmarks.bookmarksList.includes(id)
+  //   ? true
+  //   : false;
+
+  // return getBookmarksStorage;
 };

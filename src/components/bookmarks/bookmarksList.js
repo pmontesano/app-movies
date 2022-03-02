@@ -26,7 +26,6 @@ const BookmarkList = ({ results }) => {
   const [isCheck, setIsCheck] = useState([]);
 
   const handleClick = (id) => (e) => {
-    console.log(id);
     const { checked } = e.target;
     setIsCheck([...isCheck, id]);
 

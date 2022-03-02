@@ -5,7 +5,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import UseAuth from '../../auth/useAuth';
 import UseBookmarks from '../../bookmarks/useBookmarks';
 
-const Bookmarks = ({ id, handleAddBookmarks, handleRevomeBookmarks }) => {
+const Bookmarks = ({
+  id,
+  handleAddBookmarks,
+  handleRevomeBookmarks,
+  variant,
+}) => {
   const auth = UseAuth();
   const history = useHistory();
   const bookmarksValue = UseBookmarks();
@@ -26,8 +31,9 @@ const Bookmarks = ({ id, handleAddBookmarks, handleRevomeBookmarks }) => {
 
   return (
     <IconButton
+      className="bookmarks-icon"
       id={id}
-      color={bookmarked ? 'primary' : 'default'}
+      color={bookmarked ? 'primary' : variant}
       aria-label="add to favorites"
       onClick={() => handleAddBookmarksClick(id)}
     >

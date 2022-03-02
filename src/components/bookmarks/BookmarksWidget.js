@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { url } from '../../config/url';
-import { removeBookmarks } from '../../actions';
+import { removeBookmarks, fetchMovieDetails } from '../../actions';
 import { handleRemoveBookmarksFunc } from './bookmarksHandles';
 import useBookmarks from '../../bookmarks/useBookmarks';
 
@@ -17,6 +17,10 @@ export default function BookmarksWidget({ results, handleClose }) {
   const { imgUrl } = url.images;
   const bookmarksContext = useBookmarks();
   const dispatch = useDispatch();
+
+  const handleDispatch = (id) => {
+    dispatch(fetchMovieDetails(id));
+  };
 
   const handleRemoveBookmarks = (id, state) => (e) => {
     e.preventDefault();
@@ -31,7 +35,11 @@ export default function BookmarksWidget({ results, handleClose }) {
         sx={{ maxWidth: 400, border: 0, boxShadow: 'none' }}
         className="card-simple"
       >
-        <Link to={`/movie/${id}`} className="bookmarks-list__img">
+        <Link
+          to={`/movie/${id}`}
+          onClick={() => handleDispatch(id)}
+          className="bookmarks-list__img"
+        >
           <CardMedia
             component="img"
             height="140"
@@ -63,7 +71,9 @@ export default function BookmarksWidget({ results, handleClose }) {
           </Typography>
           <CardActions>
             <Button size="small">
-              <Link to={`/movie/${id}`}>Ver</Link>
+              <Link to={`/movie/${id}`} onClick={() => handleDispatch(id)}>
+                Ver
+              </Link>
             </Button>
             <Button
               size="small"

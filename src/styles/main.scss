@@ -5,6 +5,8 @@
 @import '../components/movies/movies';
 @import '../components/header/header';
 @import '../components/bookmarks/bookmarks';
+@import '../components/rating/rating';
+@import '../components/search/search';
 
 body {
   font-family: 'Lato', sans-serif;
@@ -194,4 +196,49 @@ body {
     font-size: 20px;
     font-weight: 600;
   }
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 300px;
+  height: calc(100vh / 2.5);
+  max-height: 360px;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #fff;
+  background-image: url('https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/hreiLoPysWG79TsyQgMzFKaOTF5.jpg');
+
+  .title {
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 1.5em;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    h3 {
+      font-size: 1em;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+}
+
+.login-form {
+  max-width: 1200px;
+  margin: 80px auto;
+}
+
+.form__input {
+  margin-top: 20px;
 }

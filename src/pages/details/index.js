@@ -5,12 +5,13 @@ import MovieDetail from '../../components/movies/detail.js';
 const Details = (props) => {
   const initialState = useSelector((state) => state);
 
-  const { fetchMovieDetails, fetchMovieSimilar } = initialState;
+  const { fetchMovieDetails, fetchMovieSimilar, fetchVideo } = initialState;
 
   return (
     <MovieDetail
       {...fetchMovieDetails}
       movieSimilar={fetchMovieSimilar}
+      movieVideo={fetchVideo}
       {...props}
     />
   );

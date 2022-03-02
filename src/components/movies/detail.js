@@ -1,11 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { url } from '../../config/url';
 import { useDispatch } from 'react-redux';
 import BodyClassName from 'react-body-classname';
 import { ShimmerPostItem } from 'react-shimmer-effects';
 import { useParams, Link } from 'react-router-dom';
-import { fetchMovieDetails, fetchMovieSimilar } from '../../actions';
+import Button from '@mui/material/Button';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import {
+  fetchMovieDetails,
+  fetchMovieSimilar,
+  fetchMovieVideo,
+} from '../../actions';
+import { addBookmarks, removeBookmarks } from '../../actions';
+import {
+  handleAddSingleBookmarksFunc,
+  handleRemoveBookmarksFunc,
+} from '../bookmarks/bookmarksHandles';
+import useBookmarks from '../../bookmarks/useBookmarks';
+import Bookmarks from '../bookmarks/bookmarks';
 import Loading from '../loading';
+import Rating from '../rating';
+import KeepMountedModal from '../modal';
+import Video from '../video';
 
 const MovieDetail = (props) => {
   const {
@@ -20,53 +36,132 @@ const MovieDetail = (props) => {
     loading,
     runtime,
     movieSimilar,
+    movieVideo,
   } = props;
   const { imgBackground, imgPicture, imgPictureHorizontal } = url.images;
 
   const dispatch = useDispatch();
   const { moviename } = useParams();
+  const bookmarksContext = useBookmarks();
+  const movieId = parseInt(moviename);
+
+  const [modalOpen, setmodalOpen] = useState(false);
+  const handleModalOpen = () => setmodalOpen(true);
+
+  const videoStyles = {
+    width: 1155,
+    height: 649,
+  };
+
+  const movieVideoDetail = {
+    id: movieVideo.id,
+    key: movieVideo.results[0]?.key,
+    name: movieVideo.results[0]?.name,
+  };
+
+  const handleModalClose = () => {
+    return setmodalOpen(false);
+  };
+
+  const results = [
+    {
+      id: moviename,
+      title,
+      overview,
+      vote_average,
+      backdrop_path,
+    },
+  ];
 
   const handleDispatch = (id) => {
     dispatch(fetchMovieDetails(id));
     dispatch(fetchMovieSimilar(id));
+    dispatch(fetchMovieVideo(id));
   };
 
   useEffect(() => {
     handleDispatch(moviename);
   }, []);
 
-  console.log('movieSimilar', movieSimilar);
+  const handleAddBookmarks = (id) => {
+    const newState = handleAddSingleBookmarksFunc(
+      id,
+      results,
+      bookmarksContext
+    );
+    bookmarksContext.addBookmark(newState);
+    dispatch(addBookmarks(newState));
+  };
+
+  const handleRevomeBookmarks = (id) => {
+    const newState = handleRemoveBookmarksFunc(id, bookmarksContext);
+    bookmarksContext.removeBookmark(newState);
+    dispatch(removeBookmarks(newState));
+  };
 
   const namespace = 'movie-detail';
 
-  const MovieData = () => (
-    <>
-      <div className={`${namespace}__picture`}>
-        <img src={`${imgPicture}${poster_path}`} />
-      </div>
-      <div className={`${namespace}__info`}>
-        <h3 className={`${namespace}__info-title`}>{title}</h3>
-        <div className={`${namespace}__facts`}>
-          <span className={`${namespace}__certification`}>PG</span>
-          <span className={`${namespace}__release'`}>{release_date}</span>
-          <ul className={`${namespace}__genres`}>
-            {genres?.map((gen) => (
-              <li key={gen.id}>
-                {gen.name}
-                <span>,&nbsp;</span>
-              </li>
-            ))}
-          </ul>
-          <span className={`${namespace}__runtime`}>{runtime} m</span>
+  console.log('movieVideoDetail', movieVideoDetail);
+  const MovieData = () => {
+    const { key, name } = movieVideoDetail;
+    return (
+      <>
+        <div className={`${namespace}__picture`}>
+          <img src={`${imgPicture}/${poster_path}`} />
         </div>
-        <div>
-          <p>Puntuación {vote_average}</p>
+        <div className={`${namespace}__info`}>
+          <h3 className={`${namespace}__info-title`}>{title}</h3>
+          <div className={`${namespace}__facts`}>
+            <span className={`${namespace}__certification`}>PG</span>
+            <span className={`${namespace}__release'`}>{release_date}</span>
+            <ul className={`${namespace}__genres`}>
+              {genres?.map((gen) => (
+                <li key={gen.id}>
+                  {gen.name}
+                  <span>,&nbsp;</span>
+                </li>
+              ))}
+            </ul>
+            <span className={`${namespace}__runtime`}>{runtime} m</span>
+          </div>
+          <div className={`${namespace}__aditional-info`}>
+            <Rating text="Puntuación de usuario" value={vote_average}></Rating>
+            <span className="bullets">
+              <Bookmarks
+                variant="inherit"
+                id={movieId}
+                color="default"
+                handleAddBookmarks={handleAddBookmarks}
+                handleRevomeBookmarks={handleRevomeBookmarks}
+              />
+            </span>
+            <div className={`${namespace}__video`}>
+              {key !== undefined ? (
+                <>
+                  <Button onClick={handleModalOpen} sx={{ color: '#fff' }}>
+                    <ArrowRightIcon />
+                    Ver trailer
+                  </Button>
+                  <KeepMountedModal
+                    modalOpen={modalOpen}
+                    handleModalClose={handleModalClose}
+                    {...videoStyles}
+                  >
+                    <Video id={key} name={name} {...videoStyles} />
+                  </KeepMountedModal>
+                </>
+              ) : (
+                ''
+              )}
+            </div>
+          </div>
+
+          <h4 className={`${namespace}__info-subtitle`}>Descripción:</h4>
+          <p>{overview}</p>
         </div>
-        <h4 className={`${namespace}__info-subtitle`}>Descripción:</h4>
-        <p>{overview}</p>
-      </div>
-    </>
-  );
+      </>
+    );
+  };
 
   const MovieSimilarData = ({ results, loading }) => {
     return (

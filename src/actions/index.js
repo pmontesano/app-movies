@@ -3,6 +3,8 @@ import {
   fetchThunk,
   fetchMovieDetails,
   fetchMovieSimilar,
+  fetchMovieVideo,
+  searchMovies,
 } from './fetch';
 import { addBookmarks, removeBookmarks } from './bookmarks';
 
@@ -11,6 +13,8 @@ export {
   fetchThunk,
   fetchMovieDetails,
   fetchMovieSimilar,
+  fetchMovieVideo,
   addBookmarks,
   removeBookmarks,
+  searchMovies,
 };

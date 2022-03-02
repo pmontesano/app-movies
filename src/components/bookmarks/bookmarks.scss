@@ -46,6 +46,11 @@
 
 .bookmarks-list-top {
   display: flex;
+  align-items: center;
   background-color: #fff;
   border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.bookmarks-icon {
+  transition: all 0.5s;
 }
