@@ -10,7 +10,7 @@
 
 body {
   font-family: 'Lato', sans-serif;
-  background-color: #eee;
+  background-color: #eee !important;
   font-size: 30px;
 }
 
@@ -39,7 +39,7 @@ body {
 }
 
 .body-white-bg {
-  background-color: #fff;
+  background-color: #fff !important;
 
   &__form {
     max-width: 1200px;
@@ -221,13 +221,13 @@ body {
     margin-bottom: 20px;
 
     h2 {
-      font-size: 1.5em;
+      font-size: 45px;
       font-weight: 700;
       line-height: 1;
     }
 
     h3 {
-      font-size: 1em;
+      font-size: 30px;
       font-weight: 600;
       margin: 0;
     }
@@ -240,5 +240,5 @@ body {
 }
 
 .form__input {
-  margin-top: 20px;
+  margin-bottom: 20px !important;
 }
