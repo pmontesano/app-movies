@@ -104,6 +104,8 @@ const MovieDetail = (props) => {
   console.log('movieVideoDetail', movieVideoDetail);
   const MovieData = () => {
     const { key, name } = movieVideoDetail;
+
+    console.log('key-->', key);
     return (
       <>
         <div className={`${namespace}__picture`}>

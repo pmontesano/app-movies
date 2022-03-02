@@ -21,7 +21,7 @@ const getSimilar = (movieId) => {
 
 const getVideo = (movieId) => {
   return doRequest(
-    `${apiUrl}/movie/${movieId}/videos?api_key=${apiKey}&language=${language}&page=1`
+    `${apiUrl}/movie/${movieId}/videos?api_key=${apiKey}&language=en-US&page=1`
   );
 };
 
