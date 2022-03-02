@@ -10,6 +10,7 @@
     "start:client": "webpack --watch --config webpack.config.js",
     "start:server": "nodemon --exec babel-node src/server/index.js",
     "build": "npm run build:client && npm run build:server",
+    "dist": "npm run build:client && npm run build:server",
     "start-dev": "npm run start:client & npm run start:server",
     "start": "npm run start:client & npm run start:server"
   },
