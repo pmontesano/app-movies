@@ -76,10 +76,8 @@ export const checkBookmarked = (id) => {
 };
 
 export const checkBookmarkedId = (id, bookmarks) => {
-  console.log(bookmarks);
   // const getBookmarksStorage = bookmarks.bookmarksList.includes(id)
   //   ? true
   //   : false;
-
   // return getBookmarksStorage;
 };
