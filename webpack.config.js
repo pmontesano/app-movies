@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: 'development',
@@ -19,7 +20,9 @@ module.exports = {
 
   output: {
     publicPath: '/',
-    path: path.resolve(__dirname, 'build'),
+    path: isProduction
+      ? path.resolve(__dirname, 'dist')
+      : path.resolve(__dirname, 'build'),
     filename: '[name].js',
   },
 
