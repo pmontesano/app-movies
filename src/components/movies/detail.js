@@ -1,8 +1,7 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import { url } from '../../config/url';
 import { useDispatch } from 'react-redux';
 import BodyClassName from 'react-body-classname';
-import { ShimmerPostItem } from 'react-shimmer-effects';
 import { useParams, Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -23,8 +22,7 @@ import Rating from '../rating';
 import KeepMountedModal from '../modal';
 import Video from '../video';
 import SkeletonImage from '../skeleton/skeletonImage';
-
-const Image = lazy(() => import('../image'));
+import Image from '../image';
 
 const MovieDetail = (props) => {
   const {
@@ -100,6 +98,12 @@ const MovieDetail = (props) => {
     const newState = handleRemoveBookmarksFunc(id, bookmarksContext);
     bookmarksContext.removeBookmark(newState);
     dispatch(removeBookmarks(newState));
+  };
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImage = (value) => {
+    setImageLoaded(value);
   };
 
   const namespace = 'movie-detail';
@@ -179,33 +183,34 @@ const MovieDetail = (props) => {
 
             return (
               <div className='item item__mini' key={id}>
-                {loading ? (
-                  <ShimmerPostItem card imageHeight={141} />
-                ) : (
-                  <>
-                    <Link
-                      to={`/movie/${id}`}
-                      onClick={() => handleDispatch(id)}
-                    >
-                      <Suspense
-                        fallback={<SkeletonImage width={250} height={141} />}
-                      >
-                        <Image
-                          img={backdrop_path}
-                          src={`${imgPictureHorizontal}${poster_path}`}
-                          className='img'
-                          alt={original_title}
-                          width={250}
-                          height={141}
-                        />
-                      </Suspense>
-                      <div className='info'>
-                        <h4 className='title'>{original_title}</h4>
-                        <div className='rating'>{popularity}</div>
-                      </div>
-                    </Link>
-                  </>
-                )}
+                <Link
+                  to={`/movie/${id}`}
+                  onClick={() => handleDispatch(id)}
+                  className='image-content'
+                >
+                  {!imageLoaded && (
+                    <SkeletonImage
+                      className='skeleton'
+                      width={250}
+                      height={141}
+                      borderRadius={8}
+                    />
+                  )}
+
+                  <Image
+                    img={backdrop_path}
+                    src={`${imgPictureHorizontal}${poster_path}`}
+                    className='img'
+                    alt={original_title}
+                    width={250}
+                    height={141}
+                    handleImage={handleImage}
+                  />
+                  <div className='info'>
+                    <h4 className='title'>{original_title}</h4>
+                    <div className='rating'>{popularity}</div>
+                  </div>
+                </Link>
               </div>
             );
           })}

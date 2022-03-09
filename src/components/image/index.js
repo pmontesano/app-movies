@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Image = ({ img, src, alt, width, height, className }) => {
+const Image = ({ img, src, alt, width, height, className, handleImage }) => {
+  const [image, setImage] = useState('');
+  console.log(image);
+
+  const handleLoad = () => {
+    handleImage(true);
+  };
+
   return (
     <img
       className={className}
@@ -12,6 +19,7 @@ const Image = ({ img, src, alt, width, height, className }) => {
       alt={alt}
       width={width}
       height={height}
+      onLoad={handleLoad}
     />
   );
 };

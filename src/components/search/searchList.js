@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -14,8 +14,7 @@ import { searchMovies } from '../../actions';
 import { url } from '../../config/url';
 import Loading from '../loading';
 import SkeletonImage from '../skeleton/skeletonImage';
-
-const Image = lazy(() => import('../image'));
+import Image from '../image';
 
 const SearchList = () => {
   const { search } = useLocation();
@@ -60,18 +59,26 @@ const SearchList = () => {
   }) => {
     const average = vote_average === 0 ? 'NR' : vote_average;
 
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    const handleImage = (value) => {
+      setImageLoaded(value);
+    };
+
     return (
       <ListItem key={id}>
         <div className='search-list__info'>
           <Link to={`/movie/${id}`}>
-            <span className='search-list__img'>
-              <Suspense fallback={<SkeletonImage width={130} height={140} />}>
-                <Image
-                  img={backdrop_path}
-                  src={`${imgUrl}/${backdrop_path}`}
-                  alt={title}
-                />
-              </Suspense>
+            <span className='search-list__img image-content'>
+              {!imageLoaded && (
+                <SkeletonImage width={130} height={140} className='skeleton' />
+              )}
+              <Image
+                img={backdrop_path}
+                src={`${imgUrl}/${backdrop_path}`}
+                alt={title}
+                handleImage={handleImage}
+              />
             </span>
             <CardHeader
               sx={{ height: 100 }}
