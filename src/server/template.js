@@ -1,5 +1,5 @@
 const root = (component, initialState) =>
-  `<!doctype html>
+  `<!DOCTYPE html>
         <html>
         <head>
         <link rel="apple-touch-icon" sizes="180x180" href="https://www.netlify.com/img/global/favicon/apple-touch-icon.png">
