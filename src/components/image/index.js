@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 
 const Image = ({ img, src, alt, width, height, className, handleImage }) => {
-  const [image, setImage] = useState('');
-  console.log(image);
-
   const handleLoad = () => {
     handleImage(true);
   };
