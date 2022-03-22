@@ -77,15 +77,15 @@ const listMovies = ({ fetchData, bookmarks }) => {
 
   return (
     <div>
-      <div className="">
-        <h3>Listado de películas: {title}</h3>
-        <Stack direction="row" spacing={2}>
+      <div className=''>
+        <h3 className='caterory-title'>Listado de películas: {title}</h3>
+        <Stack direction='row' spacing={2} className='menu-categories'>
           {arrayTitle.map((category, i) => (
             <Button
               category={category.cat}
               key={i}
               className={`${category === category.cat} ? "button--grey": ''`}
-              variant="outlined"
+              variant='outlined'
               onClick={() =>
                 fecthCategory(movie, category.cat, 1, category.text)
               }
@@ -102,18 +102,18 @@ const listMovies = ({ fetchData, bookmarks }) => {
         bookmarks={bookmarks}
       />
       <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
         m={4}
         spacing={2}
       >
         <Pagination
           count={10}
-          shape="rounded"
-          size="large"
+          shape='rounded'
+          size='large'
           page={page}
-          color="primary"
+          color='primary'
           onChange={handleChangePage(movie, category)}
         />
       </Stack>

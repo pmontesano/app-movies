@@ -6,11 +6,11 @@ import Search from '../search';
 const Main = (props) => {
   return (
     <>
-      <div className="hero">
+      <div className='hero'>
         <ContainerPage>
-          <div className="title">
+          <div className='title'>
             <h2>Bienvenidos.</h2>
-            <h3>
+            <h3 className='subtitle'>
               Millones de películas, programas de televisión y personas por
               descubrir. Explora ahora.
             </h3>

@@ -63,7 +63,7 @@ const BookmarkList = ({ results }) => {
       key={id}
       secondaryAction={
         <Button
-          size="small"
+          size='small'
           onClick={handleRemoveBookmarks(id, bookmarksContext)}
         >
           Eliminar
@@ -74,7 +74,7 @@ const BookmarkList = ({ results }) => {
         <ListItemIcon>
           <Checkbox
             onClick={handleClick(id)}
-            edge="start"
+            edge='start'
             tabIndex={-1}
             disableRipple
             inputProps={{ 'aria-labelledby': id }}
@@ -82,31 +82,36 @@ const BookmarkList = ({ results }) => {
           />
         </ListItemIcon>
       </ListItemButton>
-      <div className="bookmarks-list__info">
+      <div className='bookmarks-list__info'>
         <Link to={`/movie/${id}`}>
-          <span className="bookmarks-list__img">
+          <span className='bookmarks-list__img'>
             <CardMedia
-              component="img"
-              height="140"
+              component='img'
+              height='140'
               image={`${imgUrl}${img}`}
               alt={title}
               sx={{ borderRadius: '4px' }}
             />
           </span>
-          <ListItemText id={id} primary={title} secondary={description} />
+          <ListItemText
+            id={id}
+            primary={title}
+            secondary={description}
+            className='bookmarks-list__text'
+          />
         </Link>
       </div>
     </ListItem>
   );
 
   return (
-    <div className="bookmarks-content">
-      <div className="bookmarks-list-top">
+    <div className='bookmarks-content'>
+      <div className='bookmarks-list-top'>
         <ListItemButton role={undefined} dense sx={{ maxWidth: 80 }}>
           <ListItemIcon>
             <Checkbox
               disabled={results?.length === 0 ? true : false}
-              edge="start"
+              edge='start'
               onClick={handleSelectAll}
               checked={results?.length === 0 ? '' : isCheckAll}
               tabIndex={-1}
@@ -124,19 +129,19 @@ const BookmarkList = ({ results }) => {
       </div>
       <List
         sx={{ width: '100%', bgcolor: 'background.paper' }}
-        className="bookmarks-list"
+        className='bookmarks-list'
       >
         {results?.length === 0 ? (
           <ListItem
             sx={{ flexDirection: 'column' }}
-            className="bookmarks-list__empty"
+            className='bookmarks-list__empty'
           >
             <h4>Nada por acá...</h4> <p>Aún no tenés productos en Favoritos</p>
           </ListItem>
         ) : (
           <TransitionGroup>
             {results?.map((movie) => (
-              <CSSTransition key={movie.id} timeout={500} classNames="item">
+              <CSSTransition key={movie.id} timeout={500} classNames='item'>
                 <FavouriteListItem {...movie} />
               </CSSTransition>
             ))}
