@@ -7,66 +7,7 @@
 @import '../components/bookmarks/bookmarks';
 @import '../components/rating/rating';
 @import '../components/search/search';
-
-@media (max-width: 768px) {
-  .hero .title .subtitle {
-    line-height: 1.3;
-    font-size: 24px;
-  }
-  .caterory-title {
-    font-size: 18px;
-    line-height: 1.3;
-  }
-  .menu-categories {
-    overflow-y: scroll;
-    button {
-      min-width: 160px;
-    }
-  }
-  .movie-detail__inner-box {
-    flex-direction: column;
-    padding-top: 40px;
-
-    .movie-detail__info {
-      padding: 30px;
-      width: 100%;
-      margin-top: 20px;
-
-      .movie-detail__facts {
-        display: block;
-      }
-    }
-
-    .movie-detail__aditional-info .rating {
-      margin-right: 0;
-
-      .text {
-        display: none;
-      }
-    }
-
-    .movie-detail__picture {
-      width: 100%;
-      padding: 30px;
-      padding-top: 0;
-      height: 500px;
-      img {
-        max-width: 100%;
-        margin: auto;
-        max-height: 600px;
-      }
-    }
-  }
-
-  .recomendation-section {
-    padding: 40px 20px !important;
-  }
-  .bookmarks-list {
-    &__text {
-      display: none;
-    }
-  }
-}
+@import './mobile.scss';
 
 body {
   font-family: 'Lato', sans-serif;
