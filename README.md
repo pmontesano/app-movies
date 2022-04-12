@@ -14,7 +14,7 @@ You need to have installed [Node.js](https://nodejs.org/), and then:
 
 1. `$ git clone git@github.com:pmontesano/app-movies.git`
 2. `$ npm i`
-3. `$ npm run dev` + open `http://localhost:3000/`
+3. `$ npm run start-dev` + open `http://localhost:3000/`
 
 ## Structure
 
