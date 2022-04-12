@@ -1,10 +1,10 @@
-# App-movies 🎥
+# App-movies 🎥 🎞️
 
 ## Description
 
 This is an App created with React and Redux, using the [TMDB API.](https://www.themoviedb.org/documentation/api?language=es)
 
-[See a demo!](https://upbeat-brattain-c6f23e.netlify.app/)
+[Live demo!](https://upbeat-brattain-c6f23e.netlify.app/)
 
 Hope you like it! 🍿 
 
@@ -12,7 +12,7 @@ Hope you like it! 🍿
 
 You need to have installed [Node.js](https://nodejs.org/), and then:
 
-1. `$ git clone https://github.com/leireriel/shopping-cart.git`
+1. `$ git clone git@github.com:pmontesano/app-movies.git`
 2. `$ npm i`
 3. `$ npm run dev` + open `http://localhost:3000/`
 
