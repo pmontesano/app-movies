@@ -109,14 +109,14 @@ app-movies
 
 ## Skills 
 
-⚙️ Javascript / ES6
-⚙️ React.js + react-router 
-⚙️ Redux 
-⚙️ LocalStorage API
-⚙️ Mui library Styled components +  Emotion Styled Components
-⚙️ NodeJs / ExpressJs
-⚙️ Formik
-⚙️ Webpack, babel.
+- Javascript / ES6
+- React.js + react-router 
+- Redux 
+- LocalStorage API
+- Mui library Styled components +  Emotion Styled Components
+- NodeJs / ExpressJs
+- Formik
+- Webpack, babel.
 
 ## How I worked and what are the reasons for my approach
 
